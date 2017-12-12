@@ -6,7 +6,8 @@ const phraseID = document.querySelector('#phrase');
 const startButton = document.querySelector('.btn__reset');
 const phraseUL = phraseID.querySelector('ul');
 const letter = document.getElementsByClassName('letter');
-const scoreboard = document.querySelectorAll('#scoreboard'); 
+const scoreboard = document.querySelector('#scoreboard'); 
+const scoreboardLI = scoreboard.querySelectorAll('.tries');
 const title = document.querySelector('.title');
 const show = document.getElementsByClassName('show');
 let missed = 0;  //number of missed letters ...
@@ -71,13 +72,13 @@ function checkWin(){
 }
 //EVENTS//
 
-startButton.addEventListener('click', () =>{
+startButton.addEventListener('click', (e) =>{
 	overlay.style.display = "none";
 	if(e.target.textContent === 'Reset'){
 		missed = 0;
 	}
-	for(let i=0; scoreboard.length; i++){
-		const reset = scoreboard.getElementsByTagName('img');
+	for(let i=0; scoreboardLI.length; i++){
+		const reset = scoreboardLI[i].getElementsByTagName('img')[0];
 		reset.src = 'images/liveHeart.png';
 	}
 	for (let i = 0; i< button.length ; i++) {
@@ -100,7 +101,7 @@ window.addEventListener('click', (e) => {
 			missed+=1;
 		}
 		if(missed >=1 && missed <=5){
-			const life = scoreboard.length-missed;
+			const life = scoreboardLI.length-missed;
 			life.getElementsByTagName('img').src = 'images/lostHeart.png';
 		}
 	checkWin();
