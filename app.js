@@ -11,6 +11,7 @@ const scoreboardLI = scoreboard.querySelectorAll('.tries');
 const title = document.querySelector('.title');
 const show = document.getElementsByClassName('show');
 let missed = 0;  //number of missed letters ...
+let letterFound = false;
 
 const phrases = 	[
 						'I longed to live near the sea',
@@ -45,7 +46,7 @@ addPhrasetoDisplay(phraseArray);
 
 function checkLetter(buttonClicked){
 	const chosenLetter = buttonClicked.textContent.toUpperCase();
-	let letterFound = false;
+	// let letterFound = false;
 	for (let i = 0; i <= letter.length; i++){
 		if(chosenLetter === letter[i].textContent){
 			letter[i].classList.add('show');
