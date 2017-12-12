@@ -47,24 +47,26 @@ addPhrasetoDisplay(phraseArray);
 function checkLetter(buttonClicked){
 	const chosenLetter = buttonClicked.textContent.toUpperCase();
 	// let letterFound = false;
-	for (let i = 0; i <= letter.length; i++){
+	for (let i = 0; i < letter.length; i++){
 		if(chosenLetter === letter[i].textContent){
 			letter[i].classList.add('show');
 			letterFound = true;
 		}
 		
 	}
-	return null;
+	 return null;
 }
 
 function checkWin(){
 	if(letter.length === show.length){
 		overlay.classList.add('win');
+		overlay.style.display = '';
 		title.textContent="You won buddy";
 		startButton.textContent = "Reset";
 		}
 	if (missed >= 5) {
 		overlay.classList.add('lose');
+		overlay.style.display = '';
 		title.textContent="Sorry , you lose!";
 		startButton.textContent = "Reset";
 
@@ -78,13 +80,18 @@ startButton.addEventListener('click', (e) =>{
 	if(e.target.textContent === 'Reset'){
 		missed = 0;
 	}
-	for(let i=0; scoreboardLI.length; i++){
+
+	for(let i=0; i<scoreboardLI.length; i++){
 		const reset = scoreboardLI[i].getElementsByTagName('img')[0];
 		reset.src = 'images/liveHeart.png';
 	}
+	
 	for (let i = 0; i< button.length ; i++) {
 		button[i].classList.remove('chosen');
 		button[i].disabled=false;
+	}
+	while(phraseUL.children.length>0){
+		phraseUL.removeChild(phraseUL.children[0]);
 	}
 	overlay.classList.remove('win');
 	overlay.classList.remove('lose');
@@ -97,13 +104,14 @@ window.addEventListener('click', (e) => {
 		e.target.className =='chosen';
 		e.target.disabled = true;
 		const letterFound = checkLetter(e.target);
-		}
+		
 		if(letterFound === null){
 			missed+=1;
 		}
 		if(missed >=1 && missed <=5){
-			const life = scoreboardLI.length-missed;
-			life.getElementsByTagName('img').src = 'images/lostHeart.png';
+			const life = scoreboardLI[scoreboardLI.length-missed];
+			life.getElementsByTagName('img')[0].src = 'images/lostHeart.png';
 		}
+	}
 	checkWin();
 });
