@@ -88,6 +88,7 @@ button {
   height: 65px;
   width: 65px;
   padding: 20px 1px 0 1px;
+  margin-top: 5px;
   margin-right: 2px;
   color: transparent;
   background: var(--color-neutral-light);
