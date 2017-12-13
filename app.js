@@ -1,7 +1,7 @@
 
 const overlay = document.querySelector('.start');
 const qwerty = document.querySelector('#qwerty');
-const button = qwerty.querySelectorAll('#button');
+const button = qwerty.querySelectorAll('button');
 const phraseID = document.querySelector('#phrase');
 const startButton = document.querySelector('.btn__reset');
 const phraseUL = phraseID.querySelector('ul');
@@ -24,11 +24,13 @@ const phrases = 	[
 
 //FUNCTIONS//
 
+//function to get random phrase
 function getRandomPhraseAsArray(arr){
 	const random = arr[Math.floor(Math.random() * arr.length)];
-	return random.toUpperCase().split('');
+	return random.toUpperCase().split(''); //split characters
 }
 
+//function  to add listitems and display the random phrase
 function addPhrasetoDisplay(arr){
    for (let i = 0; i< arr.length; i++){
    	const listItem = document.createElement('li');
@@ -41,20 +43,18 @@ function addPhrasetoDisplay(arr){
    	}
    }
 }   
-const phraseArray = getRandomPhraseAsArray(phrases);
-addPhrasetoDisplay(phraseArray); 
 
+//function for validating  letters in white spaces
 function checkLetter(buttonClicked){
 	const chosenLetter = buttonClicked.textContent.toUpperCase();
-	// let letterFound = false;
+	let letterFound = false;
 	for (let i = 0; i < letter.length; i++){
 		if(chosenLetter === letter[i].textContent){
 			letter[i].classList.add('show');
 			letterFound = true;
-		}
-		
+		}	
 	}
-	 return null;
+	return letterFound; //returning true or false depends what the if founds
 }
 
 function checkWin(){
@@ -69,7 +69,6 @@ function checkWin(){
 		overlay.style.display = '';
 		title.textContent="Sorry , you lose!";
 		startButton.textContent = "Reset";
-
 	}
 
 }
@@ -77,24 +76,34 @@ function checkWin(){
 
 startButton.addEventListener('click', (e) =>{
 	overlay.style.display = "none";
+
+	//reset the missed value when user clicks 'Reset' game
 	if(e.target.textContent === 'Reset'){
 		missed = 0;
 	}
 
+	//reset life
 	for(let i=0; i<scoreboardLI.length; i++){
 		const reset = scoreboardLI[i].getElementsByTagName('img')[0];
 		reset.src = 'images/liveHeart.png';
 	}
 	
+	//reset button 
 	for (let i = 0; i< button.length ; i++) {
 		button[i].classList.remove('chosen');
 		button[i].disabled=false;
 	}
+
+	//remove list items
 	while(phraseUL.children.length>0){
 		phraseUL.removeChild(phraseUL.children[0]);
 	}
+
+	//reset overlay classes
 	overlay.classList.remove('win');
 	overlay.classList.remove('lose');
+
+	//new random phrase
 	const phrase = getRandomPhraseAsArray(phrases);
 	addPhrasetoDisplay(phrase);
 
@@ -105,7 +114,7 @@ window.addEventListener('click', (e) => {
 		e.target.disabled = true;
 		const letterFound = checkLetter(e.target);
 		
-		if(letterFound === null){
+		if(letterFound === false){
 			missed+=1;
 		}
 		if(missed >=1 && missed <=5){
