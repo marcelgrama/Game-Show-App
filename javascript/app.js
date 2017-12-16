@@ -1,5 +1,5 @@
 
-const overlay = document.querySelector('.start');
+const start = document.querySelector('.start');
 const qwerty = document.querySelector('#qwerty');
 const button = qwerty.querySelectorAll('button');
 const phraseID = document.querySelector('#phrase');
@@ -24,13 +24,13 @@ const phrases = 	[
 
 //FUNCTIONS//
 
-//function to get random phrase
+//get random phrase
 function getRandomPhraseAsArray(arr){
 	const random = arr[Math.floor(Math.random() * arr.length)];
 	return random.toUpperCase().split(''); //split characters
 }
 
-//function  to add listitems and display the random phrase
+//add listitems and display the random phrase
 function addPhrasetoDisplay(arr){
    for (let i = 0; i< arr.length; i++){
    	const listItem = document.createElement('li');
@@ -59,14 +59,14 @@ function checkLetter(buttonClicked){
 
 function checkWin(){
 	if(letter.length === show.length){
-		overlay.classList.add('win');
-		overlay.style.display = '';
+		start.classList.add('win');
+		start.style.display = '';
 		title.textContent="You won buddy";
 		startButton.textContent = "Reset";
 		}
 	if (missed >= 5) {
-		overlay.classList.add('lose');
-		overlay.style.display = '';
+		start.classList.add('lose');
+		start.style.display = '';
 		title.textContent="Sorry , you lose!";
 		startButton.textContent = "Reset";
 	}
@@ -75,7 +75,7 @@ function checkWin(){
 //EVENTS//
 
 startButton.addEventListener('click', (e) =>{
-	overlay.style.display = "none";
+	start.style.display = "none";
 
 	//reset the missed value when user clicks 'Reset' game
 	if(e.target.textContent === 'Reset'){
@@ -99,9 +99,9 @@ startButton.addEventListener('click', (e) =>{
 		phraseUL.removeChild(phraseUL.children[0]);
 	}
 
-	//reset overlay classes
-	overlay.classList.remove('win');
-	overlay.classList.remove('lose');
+	//reset start classes
+	start.classList.remove('win');
+	start.classList.remove('lose');
 
 	//new random phrase
 	const phrase = getRandomPhraseAsArray(phrases);
