@@ -91,6 +91,7 @@ startButton.addEventListener('click', (e) =>{
 	//reset button 
 	for (let i = 0; i< button.length ; i++) {
 		button[i].classList.remove('chosen');
+		button[i].style.backgroundColor="";
 		button[i].disabled=false;
 	}
 
@@ -112,6 +113,8 @@ window.addEventListener('click', (e) => {
 	if(e.target.tagName === 'BUTTON'){
 		e.target.className =='chosen';
 		e.target.disabled = true;
+		e.target.style.backgroundColor = "red";
+		
 		const letterFound = checkLetter(e.target);
 		
 		if(letterFound === false){
